@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  awsserver:
+    image: siddharthpatel1/aws:v1
+    container_name: awsserver
+    restart: unless-stopped
+    #ports:
+    #  - "22"
+    tty: true
+    networks:
+      - aws_network
+
+networks:
+  aws_network:
+    driver: bridge

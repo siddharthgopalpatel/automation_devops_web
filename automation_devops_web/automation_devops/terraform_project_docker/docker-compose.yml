@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  terraform:
+    image: siddharthpatel1/terraform:v1
+    container_name: terraform
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    tty: true
+    networks:
+      - t_network
+
+networks:
+  t_network:
+    driver: bridge
+

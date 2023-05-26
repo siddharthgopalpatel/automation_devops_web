@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+{% block body %}
+
+<!--<meta http-equiv="refresh" content="5"> -->
+<section id="intro">
+    <div class="intro-container wow fadeIn">
+        <form method="POST" action="/result" target="_blank">
+            <div class="form-group">
+            {% csrf_token %}
+	    <p>CONGRATULATIONS your {{htmlcode}} Environment is getting {{html}}</p>
+	    <p>It may take few minutes to create the environment, thank you for your patience</p>
+	    <p class="w3-medium"><a href="/logs" target="_blank">Click here to check the logs</a></p>
+	    <p>{{text1}}</p>
+            <p>{{text2}}</p> 
+	    <p>{{text3}}</p>
+	    <p class="w3-medium"><a href="/input">Click here to go to input page</a></p>
+            <!--<textarea class="form-control" rows="1" cols="30" id="textcode1" name="textcode1"></textarea>
+            <p>Enter your action here</p>
+            <textarea class="form-control" rows="1" cols="30" id="textcode2" name="textcode2"></textarea>
+            <br>
+	    <button type="submit" class="btn"   style="background-color:rgb(241,61,119);color:white;">Convert</button> -->
+            </div>
+        </form>
+    </div>
+  </section>
+  
+
+
+
+
+
+
+{% endblock body %}

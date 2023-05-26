@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+{% block body %}
+
+<section id="intro">
+    <div class="intro-container wow fadeIn">
+            <form method="POST" action="/result">
+            <div class="form-group">
+      
+	    <label for="tool"><p>Choose the tool name: </p></label>
+            <select name="tool" id="tool">
+              <option value="apache">Apache</option>
+              <option value="ansible">Ansible</option>
+              <option value="aws">AWS</option>
+              <option value="django">Django</option>
+              <option value="elk">ELK Stack</option>
+              <option value="prometheus">Prometheus and Grafana</option>
+              <option value="mysql">MySQL</option>
+              <option value="jenkins">Jenkins</option>
+              <option value="terraform">Terraform</option>
+	    </select>
+            <br>
+	    <label for="action"><p>Choose an action:</p></label>
+            <select name="action" id="action">
+              <option value="create">Create</option>
+              <option value="connectivity">Connectivity</option>
+              <option value="logs">Logs</option>
+              <option value="connect">Connect</option>
+              <option value="destroy">Destroy</option>
+            </select>
+	    {% csrf_token %}
+	    <br>
+            <button type="submit" class="btn"   style="background-color:rgb(241,61,119);color:white;">Submit</button>
+	    </div>
+        </form>
+    </div>
+  </section>
+
+
+
+
+
+
+
+{% endblock body %}

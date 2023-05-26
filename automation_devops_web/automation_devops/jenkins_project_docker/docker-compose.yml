@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  jenkinsserver:
+    image: siddharthpatel1/jenkins:v1
+    container_name: jenkinsserver
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    tty: true
+    networks:
+      - jenkins_network
+
+networks:
+  jenkins_network:
+    driver: bridge
+

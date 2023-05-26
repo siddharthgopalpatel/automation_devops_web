@@ -1,0 +1,53 @@
+version: "3.7"
+
+services:
+  elasticsearch:
+    image: siddharthpatel1/elasticsearch:v1
+    container_name: elasticsearch
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+    tty: true
+    networks:
+      - elk_network
+
+  kibana:
+    image: siddharthpatel1/kibana:v1
+    container_name: kibana
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
+    tty: true
+    networks:
+      - elk_network
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: siddharthpatel1/logstash:v1
+    container_name: logstash
+    restart: unless-stopped
+    ports:
+      - "5044:5044"
+    tty: true
+    networks:
+      - elk_network
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: siddharthpatel1/filebeat:v1
+    container_name: filebeat
+    restart: unless-stopped
+      #ports:
+      #- "80:80"
+    tty: true
+    networks:
+      - elk_network
+    depends_on:
+      - elasticsearch
+
+networks:
+  elk_network:
+    driver: bridge
+

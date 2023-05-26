@@ -1,0 +1,20 @@
+FROM ubuntu:20.04
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get -y install gnupg wget sudo curl
+#Install_JAVA
+RUN apt install openjdk-11-jdk -y
+#RUN apt-get install default-jdk -y
+#RUN apt-get install openjdk-8-jre -y
+#ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+#ENV PATH=$PATH:$JAVA_HOME:$HOME/bin
+RUN curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+RUN echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+RUN apt-get update
+RUN apt-get install jenkins -y
+#RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+#RUN sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+#RUN apt-get update
+#RUN apt install -y jenkins
+ENTRYPOINT sudo service jenkins start && bash

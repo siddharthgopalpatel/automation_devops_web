@@ -1,0 +1,44 @@
+version: "3.7"
+
+services:
+  ansibleserver:
+    image: siddharthpatel1/ansiblemanagenode:v1
+    container_name: ansibleserver
+    restart: unless-stopped
+    #ports:
+    #  - "22"
+    tty: true
+    networks:
+      - ansible_network
+
+  ubuntuhost:
+    image: siddharthpatel1/ubuntuhost:v1
+    container_name: ubuntuhost
+    restart: unless-stopped
+    ports:
+      - "22"
+      - "80:80"
+      - "443:443"
+    tty: true
+    networks:
+      - ansible_network
+    depends_on:
+      - ansibleserver
+
+
+  amazonlinuxhost:
+    image: siddharthpatel1/amazonhost:v1
+    container_name: amazonlinuxhost
+    restart: unless-stopped
+    #ports:
+    #  - "22"
+    tty: true
+    networks:
+      - ansible_network
+    depends_on:
+      - ansibleserver
+
+networks:
+  ansible_network:
+    driver: bridge
+

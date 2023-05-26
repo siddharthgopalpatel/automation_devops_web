@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  sp-mysql:
+    image: mysql/mysql-server:8.0.20
+    container_name: sp-mysql
+    volumes:
+      - type: volume
+        source: mysql-volume
+        target: /var/lib/mysql  
+      - ./database_files:/var/lib/mysql-files/
+    environment:
+      MYSQL_ROOT_PASSWORD: "abc123"
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql_network
+
+  sp_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: sp_phpmyadmin
+    volumes:
+      - type: volume
+        source: phpadmin_volume
+        target: /etc/phpmyadmin/config.user.inc.php
+    ports:
+      - "82:80"
+    links:
+      - sp-mysql:db
+    networks:
+      - mysql_network
+
+networks:
+  mysql_network:
+    driver: bridge
+
+volumes:
+  mysql-volume:
+  phpadmin_volume:
+  database_files:
